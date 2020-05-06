@@ -17,7 +17,7 @@ namespace XMLGUI
     {
         public XMLViewer()
         {
-            InitializeComponent();
+            InitializeComponen();
         }
 
         private void OnSetFilterClick(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace XMLGUI
             // 
             // XMLViewer
             // 
-            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.ClientSize = new System.Drawing.Size(507, 333);
             this.Name = "XMLViewer";
             this.Load += new System.EventHandler(this.XMLViewer_Load);
             this.ResumeLayout(false);
