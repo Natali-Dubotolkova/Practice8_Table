@@ -1,0 +1,10 @@
+G:\Политех\C#\Practice8\Practice8\Table\bin\Debug\Table.exe.config
+G:\Политех\C#\Practice8\Practice8\Table\bin\Debug\Table.exe
+G:\Политех\C#\Practice8\Practice8\Table\bin\Debug\Table.pdb
+G:\Политех\C#\Practice8\Practice8\Table\obj\Debug\Table.csprojAssemblyReference.cache
+G:\Политех\C#\Practice8\Practice8\Table\obj\Debug\Table.Properties.Resources.resources
+G:\Политех\C#\Practice8\Practice8\Table\obj\Debug\Table.csproj.GenerateResource.cache
+G:\Политех\C#\Practice8\Practice8\Table\obj\Debug\Table.exe
+G:\Политех\C#\Practice8\Practice8\Table\obj\Debug\Table.pdb
+G:\Политех\C#\Practice8\Practice8\Table\obj\Debug\Table.Forms.FilterProp.resources
+G:\Политех\C#\Practice8\Practice8\Table\obj\Debug\Table.LibraryBD.resources

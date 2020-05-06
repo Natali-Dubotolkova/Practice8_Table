@@ -1,0 +1,10 @@
+G:\Политех\C#\Practice8\Practice8\Practice8\obj\Debug\Practice8.csprojAssemblyReference.cache
+G:\Политех\C#\Practice8\Practice8\Practice8\obj\Debug\Practice8.Properties.Resources.resources
+G:\Политех\C#\Practice8\Practice8\Practice8\obj\Debug\XMLGUI.XMLViewer.resources
+G:\Политех\C#\Practice8\Practice8\Practice8\obj\Debug\Practice8.csproj.GenerateResource.cache
+G:\Политех\C#\Practice8\Practice8\Practice8\bin\Debug\Practice8.exe.config
+G:\Политех\C#\Practice8\Practice8\Practice8\bin\Debug\Practice8.exe
+G:\Политех\C#\Practice8\Practice8\Practice8\bin\Debug\Practice8.pdb
+G:\Политех\C#\Practice8\Practice8\Practice8\obj\Debug\XMLGUI.Forms.FilterProperties.resources
+G:\Политех\C#\Practice8\Practice8\Practice8\obj\Debug\Practice8.exe
+G:\Политех\C#\Practice8\Practice8\Practice8\obj\Debug\Practice8.pdb
