@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -51,6 +45,82 @@ namespace Table
                 Console.WriteLine();
             }
         }
+        public bool InputCheckInt(string s)
+        {
+            int iA;
+            try
+            {
+                iA = Convert.ToInt32(s);
+            }
+            catch
+            {
+                MessageBox.Show(
+                        "Введён неверный тип данных: введите число ",
+                        "Ошибка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly);
+                return false;
+            }
+            return true;
+        }
+        public bool InputCheckString(string s)
+        {
+            string sB;
+            try
+            {
+                sB = Convert.ToString(s);
+                if(sB == "")
+                {
+                    throw new ArgumentNullException();
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show(
+                        "Введена пустая строка ",
+                        "Ошибка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly);
+                return false;
+            }
+            catch
+            {
+                MessageBox.Show(
+                        "Введён неверный тип данных: введите строку ",
+                        "Ошибка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly);
+                return false;
+            }
+            return true;
+        }
+        public bool InputCheckDate(string s)
+        {
+            DateTime dC;
+            try
+            {
+                dC = Convert.ToDateTime(s);
+                
+            }
+            catch
+            {
+                MessageBox.Show(
+                        "Введён неверный тип данных: введите дату ",
+                        "Ошибка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly);
+                return false;
+            }
+            return true;
+        }
 
         //кнопка Записать
         private void button2_Click(object sender, EventArgs e)
@@ -61,26 +131,10 @@ namespace Table
             {
                 XDocument xmlDoc = XDocument.Load(path);
 
-                string sLast, sAuthor, sName, sPubl;
-                int iCard, iReturn, iPrice, iYear;
-                DateTime dIssue;
-
-                sLast = Convert.ToString(textBox3.Text);
-                sAuthor = Convert.ToString(textBox6.Text);
-                sName = Convert.ToString(textBox7.Text);
-                sPubl = Convert.ToString(textBox9.Text);
-
-                iCard = Convert.ToInt32(textBox2.Text);
-                iPrice = Convert.ToInt32(textBox10.Text);
-                iYear = Convert.ToInt32(textBox8.Text);
-                iReturn = Convert.ToInt32(textBox5.Text);
-
-                dIssue = Convert.ToDateTime(textBox4.Text);
-
-
-                //если значения не пустые, записываем строчку
-                if (textBox2.Text != "" && textBox2.Text != "" && textBox3.Text != "" && textBox4.Text != ""
-                    && textBox5.Text != "" && textBox6.Text != "" && textBox7.Text != "" && textBox8.Text != "" && textBox9.Text != "" && textBox10.Text != "")
+                
+                if(InputCheckInt(textBox2.Text)==true && InputCheckInt(textBox10.Text) == true && InputCheckInt(textBox8.Text) == true && InputCheckInt(textBox5.Text) == true &&
+                    InputCheckString(textBox3.Text) == true && InputCheckString(textBox6.Text) == true && InputCheckString(textBox7.Text) == true && InputCheckString(textBox9.Text) == true &&
+                    InputCheckDate(textBox4.Text) == true)
                 {
                     xmlDoc.Elements("catalog").First().Add(new XElement("record", new XElement("library_card", textBox2.Text),
                                                                               new XElement("last_name", textBox3.Text), new XElement("date_of_issue", textBox4.Text),
@@ -95,38 +149,27 @@ namespace Table
                     dataGridView1.Rows.Add(r0);
 
                 }
-                else
-                {
-                    MessageBox.Show(
-                        "Введена пустая ячейка",
-                        "Ошибка",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly);
-                    return;
-                }
             }
             catch (ArgumentNullException)
             {
                 MessageBox.Show(
-                       "Файл не бл загружен",
+                       "Файл не был загружен",
                        "Ошибка",
                        MessageBoxButtons.OK,
                        MessageBoxIcon.Error,
                        MessageBoxDefaultButton.Button1,
                        MessageBoxOptions.DefaultDesktopOnly);
             }
-            catch 
+            catch (Exception)
             {
                 MessageBox.Show(
-                        "Введён неверный тип данных ",
-                        "Ошибка",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly);
-                
+                       "Ошибка ввода данных",
+                       "Ошибка",
+                       MessageBoxButtons.OK,
+                       MessageBoxIcon.Error,
+                       MessageBoxDefaultButton.Button1,
+                       MessageBoxOptions.DefaultDesktopOnly);
+
             }
 
 
@@ -202,7 +245,6 @@ namespace Table
 
         }
 
-
         //кнопка Удалить
         private void button3_Click(object sender, EventArgs e)
         {
@@ -250,13 +292,6 @@ namespace Table
 
         public void OnFilterChangeEvent(object sender, FilterChangeEventArgs e)
         {
-            //update this form, using information from e.Param
-            //for example:
-            //label10.Text = e.Param;
-
-            //ЧТО ЛУЧШЕ ИСПОЛЬЗОВАТЬ? SWITCH или IF?????????????
-
-
             switch (e.radiobut)
             {
                 case "author":
@@ -265,7 +300,8 @@ namespace Table
                     {
                         XElement xelement = XElement.Load(path);
                         var xes = from pub in xelement.Elements("record")
-                                  where (string)pub.Element(e.radiobut) == e.Param
+                                  let b = (string)pub.Element(e.radiobut)
+                                  where b.Contains(e.Param)
                                   select pub;
 
                         dataGridView1.Rows.Clear();
